@@ -59,7 +59,7 @@ function add_new(){
 		'contact_2': $('#contact_2').val(),
 	};
 	console.log(json);
-	$.post('php/add_new_property.php', json, function(data){
-
+	$.post('php/add_new_data.php', json, function(data){
+		console.log(data);
 	});
 }
