@@ -38,8 +38,8 @@ class DB_Connection{
             error_log($command);        
         }
         else{
-            error_log( "queryy failed ".$this->m_connection->error);
-            error_log("<br>".$command."<br>");
+            error_log( "|||||||||||||||||||||||||queryy failed ".$this->m_connection->error);
+            error_log("||||||||||||||||||||||||||".$command."");
         }
         $this->close_connection();
         return $res;
