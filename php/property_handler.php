@@ -4,6 +4,7 @@
 	mysql and creating/deleting photos
 */
 require_once("db_connector.php");
+require_once("image_handler.php");
 class Property_Handler{
 	
 	var $m_connection;	
@@ -65,9 +66,26 @@ class Property_Handler{
 		$data=$data.")";*/
 		
 		$command = "".$this->c_add_new_data . $data;
-		echo $command;
-		$this->m_connection->execute($command);
-		
+		echo $this->m_connection->insert($command). $post["user"];
+		//this doesnt work beecause connection closes
+		/*echo $this->m_connection->getLastId();
+		$ih = new ImageHandler;
+		$ih->save_image("");*/
+	}
+	function save_image($post){
+		//create table for the property if not exists
+		//that will hold thee photo b64 strings
+        // echo $post;
+        echo "creating ".$post["name"]."\n";
+		$this->m_connection->execute("".
+		"CREATE TABLE IF NOT EXISTS ".$post["name"].
+		"(id int(32) unsigned auto_increment primary key not null,".
+		"data TEXT)");
+		//add new photo to db
+		$this->m_connection->execute("".
+		"INSERT INTO ".$post["name"].
+		"(data)".	
+		" VALUES('".$post["data"]."')");
 	}
 }
 ?>

@@ -60,6 +60,24 @@ function add_new(){
 	};
 	console.log(json);
 	$.post('php/add_new_data.php', json, function(data){
-		console.log(data);
+		//returns folder name (username+propeerty id)
+		uploadImages(data);
+		
 	});
+}
+function uploadImages(id){
+    var all_img = $("#upload_photos").find("img");
+    //this could use an interrupt
+    this.uploadOne=function(index){
+        if(index >= all_img.length) return;
+        var src = $(all_img[index]).attr("src");
+
+        var sd = {"name":id, "data":src};
+		//console.log(sd);
+		$.post('php/save_photo.php', sd, function(data){
+            index++;
+            uploadOne(index);
+        });
+    }
+    uploadOne(0);
 }

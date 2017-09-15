@@ -45,5 +45,19 @@ class DB_Connection{
         return $res;
 
     }
+	function insert($command){
+		$this->connect(); 
+		$res = $this->m_connection->query($command);
+		if(!$this->m_connection->error){
+		    error_log($command);        
+		}
+		else{
+		    error_log( "|||||||||||||||||||||||||queryy failed ".$this->m_connection->error);
+		    error_log("||||||||||||||||||||||||||".$command."");
+		}
+		$id = $this->m_connection->insert_id;
+		$this->close_connection();
+		return $id;
+	}
 }
 ?>
