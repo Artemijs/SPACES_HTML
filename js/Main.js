@@ -1,7 +1,17 @@
 var username;
 var page = 0;
-
+var pages = ["logIn.html","add_property.html", "my_uploads.html"];
 function onLoad(){
+    //load html
+    loadHTML();
+/*
+    $.get('php/test.php',"nothing", function(data){
+        console.log(data); 
+    });
+*/
+}
+
+function processHTML(){
 	$('#submit_new').click(add_new);
     $("#login").click(logIn);
     $("#my_uploads").click(function(){changePage(2);});
@@ -10,6 +20,21 @@ function onLoad(){
     $("#page_2").hide();
     $("#nav").hide();
 
+
+}
+function loadHTML(){
+    this.getFile=function(index){
+        $.get("php/load_html.php",{"file":pages[index]}, function(data){
+            if(index >= pages.length){
+                processHTML();
+                return;
+            }
+            $("#main").append(data);
+            index++;
+            getFile(index);
+        });
+    }
+    getFile(0);
 }
 function logIn(){
     username = $("#user").val();
