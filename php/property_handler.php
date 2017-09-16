@@ -59,23 +59,13 @@ class Property_Handler{
 			"'".$post["contact_2"]."'".
 			" ) ";
 
-		/*foreach($post as $key => $value){
-			 $data = $data . $value . ", ";
-		}
-		$data = substr($data, 0, -2);
-		$data=$data.")";*/
-		
+	
 		$command = "".$this->c_add_new_data . $data;
 		echo $this->m_connection->insert($command). $post["user"];
-		//this doesnt work beecause connection closes
-		/*echo $this->m_connection->getLastId();
-		$ih = new ImageHandler;
-		$ih->save_image("");*/
-	}
+			}
 	function save_image($post){
 		//create table for the property if not exists
 		//that will hold thee photo b64 strings
-        // echo $post;
         echo "creating ".$post["name"]."\n";
 		$this->m_connection->execute("".
 		"CREATE TABLE IF NOT EXISTS ".$post["name"].
@@ -87,5 +77,8 @@ class Property_Handler{
 		"(data)".	
 		" VALUES('".$post["data"]."')");
 	}
+    function get_user_property($user){
+        return $this->m_connection->execute("SELECT * FROM ".$this->PROPERTY_TABLE." WHERE user = '".$user."'");
+    }
 }
 ?>

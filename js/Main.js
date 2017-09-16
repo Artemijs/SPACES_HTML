@@ -1,5 +1,34 @@
+var username;
+var page = 0;
+
 function onLoad(){
 	$('#submit_new').click(add_new);
+    $("#login").click(logIn);
+    $("#my_uploads").click(function(){changePage(2);});
+    $("#add_new").click(function(){changePage(1);});
+    $("#page_1").hide();
+    $("#page_2").hide();
+    $("#nav").hide();
+
+}
+function logIn(){
+    username = $("#user").val();
+    $("#nav").show();
+    changePage(1);
+}
+function changePage(newPage){
+    $("#page_"+page).hide();
+    page = newPage;
+    $("#page_"+page).show();
+    if(page == 2) showMyProperty();
+}
+function showMyProperty(){
+    var limit = 5;
+    //get the data
+    $.get("php/get_property_data.php",{"name": username}, function(data){
+        console.log(data); 
+    });
+    //get the first photo
 }
 //display a thumbnail of the selected picture
 function display(input) {
