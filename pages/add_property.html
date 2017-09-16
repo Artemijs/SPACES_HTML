@@ -1,44 +1,247 @@
 <!-- add new -->
 <div id="page_1">
-    <p >address</p>
-    <input type="text" id="address_1">
-    <br>
-    <p >address</p>
-    <input type="text" id="address_2">
-    <br><br>
-    <p >type</p>
-    <input type="text" id="type">
-    <p >size</p>
-    <input type="text" id="size">
-    <p >availability</p>
-    <input type="text" id="availability">
-    <p >rent period</p>
-    <input type="text" id="rent_period">
-    <p >situation</p>
-    <textarea rows="4" cols="50" id = 'situation'></textarea>
-    <br>
-    <input type="checkbox" id = 'a_electricity'>Electricity
-    <input type="checkbox" id = 'a_wifi'>WiFi
-    <input type="checkbox" id = 'a_bathrooms'>Bathrooms
-    <input type="checkbox" id = 'a_24_7_access'>24/7 access
-    <input type="checkbox" id = 'a_heating'>Heating
-    <input type="checkbox" id = 'a_furniture'>Furniture
-    <input type="checkbox" id = 'a_sound_iso'>Sound isolation
-    <input type="checkbox" id = 'a_pub_transport'>Public Transport
-    <input type="checkbox" id = 'a_parking'>Parking
-    <br>
-    <p> Upload</p>
-    <input type="file" onchange="display(this)">
-    <div id='upload_photos'></div>
-    <br>
-    <p >more details</p>
-    <textarea rows="4" cols="50" id = 'details'></textarea>
-    <!-- I SKIPPED LISTED -->
-    <br>
-    <p> contact</p>
-    <input type="text" id="contact_1">
-    <input type="text" id="contact_2">
-    <br><br><br>
-    <input type='button' value='Submit' id ='submit_new'>
+    <!-- Intro Header -->
+    <header class="masthead">
+      <div class="intro-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <h1 class="brand-heading">ADD PROPERTY</h1>
+              <form action="#">
+                <div class="row margin-bottom">
+                    <div class="col-lg-11" style="background-color: ;">
+                        <div class="label"><p><i>Location:</i></p></div> 
+                        <div style="overflow:hidden;width: auto;">
+                            <input type="text" name="address1" class="addresslist" style="overflow:hidden; width: 100%" placeholder="Enter Address:">
+                            <input type="text" name="eircode" class="addresslist" style="overflow:hidden; width: 100%" placeholder="Enter Eircode:">
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-bottom" style="background-color: ;"> 
+                    <div class="col-lg-6 margin-bottom" style="background-color: ; ">
+                        <div class="label"><p style="padding-top: 8px;"><i>Building type:</i></p></div>
+                        <div style="overflow:hidden;width: auto;">
+                        <select name="Building type: " style="width: 100%">
+                            <option>-- Select Type -- </option>
+                            <option value="Officet">Office</option>
+                            <option value="Industrialt">Industrial</option>
+                            <option value="Businessparkunits">Business park units</option>
+                            <option value="Studiot">Studio</option>
+                            <option value="Workshopt">Workshop</option>
+                            <option value="Warehouset">Warehouse</option>
+                            <option value="Exhibitiont">Exhibition Space</option>
+                            <option value="Communityt">Community Centre</option>
+                            <option value="Othert">Other</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 margin-bottom" style="background-color:;">
+                        <div class="label"><p><i>Size:</i></p></div>
+                        <div style="overflow:hidden;width: auto;">
+                          <select name="Size: " id="optionlist" style="width: 100%">
+                            <option>-- Select Size --</option>
+                            <option value="1">Small</option>
+                            <option value="2">Medium</option>
+                            <option value="3">Large</option>
+                            <option value="4">(800-1500sq)</option>
+                          </select></div>
+                    </div>
+                </div>
+                <div class="row margin-bottom">
+                    <div class="col-lg-11" style="background-color: ;">
+                        <div class="label"><p><i>Amenities:</i></p></div> 
+                        <div class="row" style="overflow:hidden;width: auto; text-align: left;">
+                            <div class="col-lg-4 col-sm-6"><input type="checkbox" name="electricity" id="electr" class="addresslist resetinput myinput large" style=""><label for="electr">Electricity</label></div>
+                            <div class="col-lg-4 col-sm-6"><input type="checkbox" name="electricity" id="access" class="addresslist resetinput myinput large" style=""><label for="access">24/7 access</label></div>
+                            <div class="col-lg-4 col-sm-6"><input type="checkbox" name="electricity" id="sound" class="addresslist resetinput myinput large" style=""><label for="sound">Sound isolation</label></div>
+                            <div class="col-lg-4 col-sm-6"><input type="checkbox" name="electricity" id="wifi" class="addresslist resetinput myinput large" style=""><label for="wifi">WiFi Internet</label></div>
+                            <div class="col-lg-4 col-sm-6"><input type="checkbox" name="electricity" id="heat" class="addresslist resetinput myinput large" style=""><label for="heat">Heating</label></div>
+                            <div class="col-lg-4 col-sm-6"><input type="checkbox" name="electricity" id="transp" class="addresslist resetinput myinput large" style=""><label for="transp">Public Transport</label></div>
+                            <div class="col-lg-4 col-sm-6"><input type="checkbox" name="electricity" id="toilet" class="addresslist resetinput myinput large" style=""><label for="toilet">Toilet</label></div>
+                            <div class="col-lg-4 col-sm-6"><input type="checkbox" name="electricity" id="furnit" class="addresslist resetinput myinput large" style=""><label for="furnit">Furniture</label></div>
+                            <div class="col-lg-4 col-sm-6"><input type="checkbox" name="electricity" id="parking" class="addresslist resetinput myinput large" style=""><label for="parking">Parking</label></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-bottom" style="background-color: ;"> 
+                    <div class="col-lg-5 margin-bottom" style="background-color: ; ">
+                        <div class="label"><p style="padding-top: 8px;"><i>Period of rent:</i></p></div>
+                        <div style="overflow:hidden;width: auto;">
+                        <select name="Period of rent: " style="width: 100%">
+                            <option>-- Select Period -- </option>
+                            <option value="periodhourly">Hourly</option>
+                            <option value="perioddaily">Daily</option>
+                            <option value="periodweekly">Weekly</option>
+                            <option value="periodmonthly">Monthly</option>
+                            <option value="periodyearly">Yearly</option>
+                            <option value="periodother">Other</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 margin-bottom" style="background-color:;">
+                        <div class="label" style="max-width: 110px;"><p>Availability:</p></div>
+                        <div style="overflow:hidden;width: auto;">
+                          <select name="Availability: " id="optionlist" style="width: 100%">
+                            <option>-- Select availability --</option>
+                            <option value="availabmorn">Mornings 06:00 - 12:00</option>
+                            <option value="availabaftern">Afternoons 12:00 - 18:00</option>
+                            <option value="availabeven">Evenings 18:00 - 24:00</option>
+                            <option value="availabnigh">Nights 24:00 - 06:00</option>
+                          </select></div>
+                    </div>
+                </div>              
+                <div class="row margin-bottom">
+                    <div class="col-lg-11" style="background-color: ;">
+                        <div class="label"><p>Situation:</p></div> 
+                        <div style="overflow:hidden;width: auto;">
+                            <textarea rows="4" name="situation" class="addresslist" style="height: inherit; overflow:hidden; width: 100%" placeholder="Enter description:"></textarea>
+                        </div>
+                    </div>
+                </div>  
+                <div class="row margin-bottom">
+                    <div class="col-lg-11" style="background-color: ;">
+                        <div class="label"><p>Attach file:</p></div> 
+                        <div style="overflow:hidden;width: auto;">
+                            <input type="file" name="pic" accept="image/*,video/*" multiple="multiple">
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-bottom">
+                    <div class="col-lg-11" style="background-color: ;">
+                        <div class="label"><p>Description:</p></div> 
+                        <div style="overflow:hidden;width: auto;">
+                            <textarea rows="4" name="situation" class="addresslist" style="height: inherit; overflow:hidden; width: 100%" placeholder="Enter Additional Description:"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-bottom">
+                    <div class="col-lg-11" style="background-color: ;">
+                        <div class="label"><p>Contact:</p></div> 
+                        <div style="overflow:hidden;width: auto;">
+                            <input type="text" name="cntctownernam" class="addresslist" style="overflow:hidden; width: 100%" placeholder="Enter contact name:">
+                            <input type="email" name="cntctowneremail" class="addresslist" style="overflow:hidden; width: 100%" placeholder="Enter contact email:">
+                            <input type="number" name="cntctownerphon" class="addresslist" style="overflow:hidden; width: 100%" placeholder="Enter mobile number:">
+                        </div>
+                    </div>
+                </div>              
+                <div class="row margin-bottom">
+                    <div class="col-lg-5 mx-auto" style="background-color: ;margin-bottom: 17px;">
+                        <input type="submit" name="addprop" value="Add property" class="searchbtn" style="">
+                    </div>              
+
+                </div>              
+                </form>
+                
+                
+              <!--
+                <a href="#about" class="btn btn-circle js-scroll-trigger">
+                <i class="fa fa-angle-double-down animated"></i>
+              -->
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Map Section -->
+    <div id="map"></div>
+    
+    <!-- Footer Links -->
+    <section id="footerlinks" class="download-section content-section text-center">
+      <div class="container">
+        <div class="col-lg-12 mx-auto">
+            <div class="row">
+                <img src="../img/creative_space_logo_room.png" style="width: 250px;height: 92px;top: 0;margin-left: 50%;left: -125px;position: relative;margin-bottom: 100px;">
+            </div>
+            <div class="row">
+                <div class="col-lg-3 flinks">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="">
+                              <h6>Footer Links</h6>
+                            </li>
+                            <li class="">
+                              <a class="footlinks" href="#">Login/Register</a>
+                            </li>
+                            <li class="">
+                              <a class="footlinks" href="#">Add Listing</a>
+                            </li>
+                            <li class="">
+                              <a class="footlinks" href="#">About</a>
+                            </li>
+                            <li class="">
+                              <a class="footlinks" href="#">Help</a>
+                            </li>
+                        </ul>
+                </div>
+                <div class="col-lg-3 flinks">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="">
+                              <h6>Footer Links</h6>
+                            </li>
+                            <li class="">
+                              <a class="footlinks" href="#">Login/Register</a>
+                            </li>
+                            <li class="">
+                              <a class="footlinks" href="#">Add Listing</a>
+                            </li>
+                            <li class="">
+                              <a class="footlinks" href="#">About</a>
+                            </li>
+                            <li class="">
+                              <a class="footlinks" href="#">Help</a>
+                            </li>
+                        </ul>
+                </div>
+                <div class="col-lg-3 flinks">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="">
+                              <h6>Footer Links</h6>
+                            </li>
+                            <li class="">
+                              <a class="footlinks" href="#">Login/Register</a>
+                            </li>
+                            <li class="">
+                              <a class="footlinks" href="#">Add Listing</a>
+                            </li>
+                            <li class="">
+                              <a class="footlinks" href="#">About</a>
+                            </li>
+                            <li class="">
+                              <a class="footlinks" href="#">Help</a>
+                            </li>
+                        </ul>
+                </div>
+                <div class="col-lg-3 flinks">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="">
+                              <h6>Footer Links</h6>
+                            </li>
+                            <li class="">
+                              <a class="footlinks" href="#">Login/Register</a>
+                            </li>
+                            <li class="">
+                              <a class="footlinks" href="#">Add Listing</a>
+                            </li>
+                            <li class="">
+                              <a class="footlinks" href="#">About</a>
+                            </li>
+                            <li class="">
+                              <a class="footlinks" href="#">Help</a>
+                            </li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>Copyright &copy; CreativeSpaces.</p>
+      </div>
+    </footer>
+
 </div>
 
