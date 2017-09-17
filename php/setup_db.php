@@ -36,8 +36,9 @@ $connection->query("CREATE TABLE IF NOT EXISTS property (".
 	" a_pub_transport boolean not null default 0,".
 	" a_parking boolean not null default 0,".
 	" details varchar(250),".
-	" contact_1 varchar(20),".
-	" contact_2 varchar(50)".
+	" contact_name varchar(20),".
+	" contact_email varchar(50),".
+    " contact_number varchar(20)".
 	")"); 
 if(!$connection->error){
     echo "created property table";

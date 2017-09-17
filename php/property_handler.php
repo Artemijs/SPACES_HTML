@@ -32,8 +32,9 @@ class Property_Handler{
 			" a_pub_transport ,".
 			" a_parking ,".
 			" details ,".
-			" contact_1 ,".
-			" contact_2) VALUES ";
+			" contact_name ,".
+			" contact_email ,".
+			" contact_number) VALUES ";
 
 	}
 	function add_new_data($post){
@@ -55,14 +56,27 @@ class Property_Handler{
 			$post["a_pub_transport"].",".
 			$post["a_parking"].",".
 			"'".$post["details"]."',".
-			"'".$post["contact_1"]."',".
-			"'".$post["contact_2"]."'".
+			"'".$post["contact_name"]."',".
+			"'".$post["contact_email"]."',".
+			"'".$post["contact_number"]."'".
 			" ) ";
 
 	
 		$command = "".$this->c_add_new_data . $data;
 		echo $this->m_connection->insert($command). $post["user"];
 			}
+    function get_image($tname, $id){
+        $result = $this->m_connection->execute("SELECT * FROM ".$tname." WHERE id = ".$id);
+        $array = array();
+        while($row = $result->fetch_object()){
+            array_push($array, $row);
+        }
+        //every code example ive seen closes the result, idk why but idc enough to question it
+        $result->close();
+        array_push($array, array("name"=>$tname));
+        return json_encode($array);
+
+    }
 	function save_image($post){
 		//create table for the property if not exists
 		//that will hold thee photo b64 strings
@@ -70,7 +84,7 @@ class Property_Handler{
 		$this->m_connection->execute("".
 		"CREATE TABLE IF NOT EXISTS ".$post["name"].
 		"(id int(32) unsigned auto_increment primary key not null,".
-		"data TEXT)");
+		"data MEDIUMTEXT)");
 		//add new photo to db
 		$this->m_connection->execute("".
 		"INSERT INTO ".$post["name"].
@@ -78,7 +92,14 @@ class Property_Handler{
 		" VALUES('".$post["data"]."')");
 	}
     function get_user_property($user){
-        return $this->m_connection->execute("SELECT * FROM ".$this->PROPERTY_TABLE." WHERE user = '".$user."'");
+        $result = $this->m_connection->execute("SELECT * FROM ".$this->PROPERTY_TABLE." WHERE user = '".$user."'");
+        $array = array();
+        while($row = $result->fetch_object()){
+            array_push($array, $row);
+        }
+        //every code example ive seen closes the result, idk why but idc enough to question it
+        $result->close();
+        return json_encode($array);
     }
 }
 ?>

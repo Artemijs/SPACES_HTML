@@ -12,8 +12,8 @@
                     <div class="col-lg-11" style="background-color: ;">
                         <div class="label"><p><i>Location:</i></p></div> 
                         <div style="overflow:hidden;width: auto;">
-                            <input type="text" name="address1" class="addresslist" style="overflow:hidden; width: 100%" placeholder="Enter Address:">
-                            <input type="text" name="eircode" class="addresslist" style="overflow:hidden; width: 100%" placeholder="Enter Eircode:">
+                            <input id="address" type="text" name="address1" class="addresslist" style="overflow:hidden; width: 100%" placeholder="Enter Address:">
+                            <input id="eircode" type="text" name="eircode" class="addresslist" style="overflow:hidden; width: 100%" placeholder="Enter Eircode:">
                         </div>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                     <div class="col-lg-6 margin-bottom" style="background-color: ; ">
                         <div class="label"><p style="padding-top: 8px;"><i>Building type:</i></p></div>
                         <div style="overflow:hidden;width: auto;">
-                        <select name="Building type: " style="width: 100%">
+                        <select id="type" name="Building type: " style="width: 100%">
                             <option>-- Select Type -- </option>
                             <option value="Officet">Office</option>
                             <option value="Industrialt">Industrial</option>
@@ -38,7 +38,7 @@
                     <div class="col-lg-5 margin-bottom" style="background-color:;">
                         <div class="label"><p><i>Size:</i></p></div>
                         <div style="overflow:hidden;width: auto;">
-                          <select name="Size: " id="optionlist" style="width: 100%">
+                          <select id="size" name="Size: "  style="width: 100%">
                             <option>-- Select Size --</option>
                             <option value="1">Small</option>
                             <option value="2">Medium</option>
@@ -67,26 +67,26 @@
                     <div class="col-lg-5 margin-bottom" style="background-color: ; ">
                         <div class="label"><p style="padding-top: 8px;"><i>Period of rent:</i></p></div>
                         <div style="overflow:hidden;width: auto;">
-                        <select name="Period of rent: " style="width: 100%">
+                        <select id="rent_period" name="Period of rent: " style="width: 100%">
                             <option>-- Select Period -- </option>
-                            <option value="periodhourly">Hourly</option>
-                            <option value="perioddaily">Daily</option>
-                            <option value="periodweekly">Weekly</option>
-                            <option value="periodmonthly">Monthly</option>
-                            <option value="periodyearly">Yearly</option>
-                            <option value="periodother">Other</option>
+                            <option value="Hourly">Hourly</option>
+                            <option value="Daily">Daily</option>
+                            <option value="Weekly">Weekly</option>
+                            <option value="Monthly">Monthly</option>
+                            <option value="Yearly">Yearly</option>
+                            <option value="Other">Other</option>
                           </select>
                         </div>
                     </div>
                     <div class="col-lg-6 margin-bottom" style="background-color:;">
                         <div class="label" style="max-width: 110px;"><p>Availability:</p></div>
                         <div style="overflow:hidden;width: auto;">
-                          <select name="Availability: " id="optionlist" style="width: 100%">
+                          <select id="availability" name="Availability: " style="width: 100%">
                             <option>-- Select availability --</option>
-                            <option value="availabmorn">Mornings 06:00 - 12:00</option>
-                            <option value="availabaftern">Afternoons 12:00 - 18:00</option>
-                            <option value="availabeven">Evenings 18:00 - 24:00</option>
-                            <option value="availabnigh">Nights 24:00 - 06:00</option>
+                            <option value="Mornings 06:00 - 12:00">Mornings 06:00 - 12:00</option>
+                            <option value="Afternoons 12:00 - 18:00">Afternoons 12:00 - 18:00</option>
+                            <option value="Evenings 18:00 - 24:00">Evenings 18:00 - 24:00</option>
+                            <option value="Nights 24:00 - 06:00">Nights 24:00 - 06:00</option>
                           </select></div>
                     </div>
                 </div>              
@@ -94,7 +94,7 @@
                     <div class="col-lg-11" style="background-color: ;">
                         <div class="label"><p>Situation:</p></div> 
                         <div style="overflow:hidden;width: auto;">
-                            <textarea rows="4" name="situation" class="addresslist" style="height: inherit; overflow:hidden; width: 100%" placeholder="Enter description:"></textarea>
+                            <textarea id="situation" rows="4" name="situation" class="addresslist" style="height: inherit; overflow:hidden; width: 100%" placeholder="Enter description:"></textarea>
                         </div>
                     </div>
                 </div>  
@@ -102,7 +102,8 @@
                     <div class="col-lg-11" style="background-color: ;">
                         <div class="label"><p>Attach file:</p></div> 
                         <div style="overflow:hidden;width: auto;">
-                            <input type="file" name="pic" accept="image/*,video/*" multiple="multiple">
+                            <input type="file" name="pic" accept="image/*,video/*" multiple="multiple" onchange="display(this)">
+                            <div id="upload_photos"></div>
                         </div>
                     </div>
                 </div>
@@ -110,7 +111,7 @@
                     <div class="col-lg-11" style="background-color: ;">
                         <div class="label"><p>Description:</p></div> 
                         <div style="overflow:hidden;width: auto;">
-                            <textarea rows="4" name="situation" class="addresslist" style="height: inherit; overflow:hidden; width: 100%" placeholder="Enter Additional Description:"></textarea>
+                            <textarea id = "details" rows="4" name="situation" class="addresslist" style="height: inherit; overflow:hidden; width: 100%" placeholder="Enter Additional Description:"></textarea>
                         </div>
                     </div>
                 </div>
@@ -118,15 +119,15 @@
                     <div class="col-lg-11" style="background-color: ;">
                         <div class="label"><p>Contact:</p></div> 
                         <div style="overflow:hidden;width: auto;">
-                            <input type="text" name="cntctownernam" class="addresslist" style="overflow:hidden; width: 100%" placeholder="Enter contact name:">
-                            <input type="email" name="cntctowneremail" class="addresslist" style="overflow:hidden; width: 100%" placeholder="Enter contact email:">
-                            <input type="number" name="cntctownerphon" class="addresslist" style="overflow:hidden; width: 100%" placeholder="Enter mobile number:">
+                            <input id="contact_name" type="text" name="cntctownernam" class="addresslist" style="overflow:hidden; width: 100%" placeholder="Enter contact name:">
+                            <input id="contact_email" type="email" name="cntctowneremail" class="addresslist" style="overflow:hidden; width: 100%" placeholder="Enter contact email:">
+                            <input id="contact_number" type="number" name="cntctownerphon" class="addresslist" style="overflow:hidden; width: 100%" placeholder="Enter mobile number:">
                         </div>
                     </div>
                 </div>              
                 <div class="row margin-bottom">
                     <div class="col-lg-5 mx-auto" style="background-color: ;margin-bottom: 17px;">
-                        <input type="submit" name="addprop" value="Add property" class="searchbtn" style="">
+                        <input id="submit_new" type="submit" name="addprop" value="Add property" class="searchbtn" style="">
                     </div>              
 
                 </div>              
@@ -152,7 +153,7 @@
       <div class="container">
         <div class="col-lg-12 mx-auto">
             <div class="row">
-                <img src="../img/creative_space_logo_room.png" style="width: 250px;height: 92px;top: 0;margin-left: 50%;left: -125px;position: relative;margin-bottom: 100px;">
+                <img src="./img/creative_space_logo_room.png" style="width: 250px;height: 92px;top: 0;margin-left: 50%;left: -125px;position: relative;margin-bottom: 100px;">
             </div>
             <div class="row">
                 <div class="col-lg-3 flinks">

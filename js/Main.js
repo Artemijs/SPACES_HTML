@@ -1,6 +1,6 @@
-var username;
-var page = 0;
-var pages = ["logIn.html","add_property.html", "my_uploads.html"];
+var username = "BOBO";
+var page = 3;
+var pages = ["logIn.html","add_property.html", "my_uploads.html", "home.html"];
 function onLoad(){
     //load html
     loadHTML();
@@ -16,6 +16,7 @@ function processHTML(){
     $("#login").click(logIn);
     $("#my_uploads").click(function(){changePage(2);});
     $("#add_new").click(function(){changePage(1);});
+    $("#page_0").hide();
     $("#page_1").hide();
     $("#page_2").hide();
     $("#nav").hide();
@@ -42,45 +43,62 @@ function logIn(){
     changePage(1);
 }
 function changePage(newPage){
+    console.log("changing page");
     $("#page_"+page).hide();
     page = newPage;
     $("#page_"+page).show();
     if(page == 2) showMyProperty();
 }
 function showMyProperty(){
+    $("#page_2").empty();
     var limit = 5;
     //get the data
     $.get("php/get_property_data.php",{"name": username}, function(data){
-        console.log(data); 
+        var json = JSON.parse(data);
+        for(var i=0; i<json.length; i++ ){
+            var usn = json[i]["id"]+json[i]["user"];
+            var div = $("<div id='"+usn+"'></div>");
+            div.append("<p>"+json[i]["address"]+"</p>");
+            div.append("<p>"+json[i]["type"]+"</p>");
+ 
+            $("#page_2").append(div);
+            //get the image
+            console.log("usn "+usn);
+            $.get("php/get_image.php",{"name":usn }, function(data){
+                var data = JSON.parse(data);
+                console.log(data);
+                $("#"+data[1]["name"]).append("<img src='"+data[0]["data"]+"'>");
+            });            
+        }
     });
-    //get the first photo
 }
 //display a thumbnail of the selected picture
 function display(input) {
 	if(input.files && input.files[0]) {
-		var reader = new FileReader();
-		//var displayWidth = 300;
-		reader.onload = function(e) {
-			$('#upload_photos').append('<img src="'+e.target.result+'">');
-			/*var height, width;
-			//var img = new Image();
+        this.displayOne=function(index){
+            console.log(input.files);
+            var reader = new FileReader();
+            reader.readAsDataURL(input.files[index]);           
+            var displayWidth = 300;
+            reader.onload = function(e) {
+                var img = $('<img src="'+e.target.result+'">');
+                $('#upload_photos').append(img);
+                var height, width;
+                width = img.width();
+                height= img.height();
+                console.log("width "+width);
+                console.log("height "+height);
+                var ratio = height / width;
+                var displayHeight = displayWidth * ratio;
+                img.width(displayWidth);
+                img.height(displayHeight);
+            }
+        }
+        
+        for(var i =0; i< input.files.length; i++){
+            displayOne(i);
+        }
 
-			img.onload = function(){
-				width = img.width;
-				height= img.height;
-				$('#thumbnail').prepend($('<img>',{id:'displayedImg'}));
-				$('#displayedImg').attr("src", this.src);
-				$('#displayedImg').show();
-				var ratio = height / width;
-				var displayHeight = displayWidth * ratio;
-				$('#displayedImg').width(displayWidth);
-				$('#displayedImg').height(displayHeight);
-
-			}
-			img.src = ;*/
-		}
-
-		reader.readAsDataURL(input.files[0]);
 	}
 }
 //sending files might complicate things
@@ -93,29 +111,30 @@ function add_new(){
 	}
 	var json = {
 		'user':'BOBO',
-		'address': $('#address_1').val()+$('#address_2').val(),
+		'address': $('#address').val(),
 		'type': $('#type').val(),
 		'size': $('#size').val(),
 		'availability': $('#availability').val(),
 		'rent_period': $('#rent_period').val(),
 		'situation': $('#situation').val(),
-		'a_electricity': this.is_checked($('#a_electricity')),
-		'a_wifi':  this.is_checked($('#a_wifi')),
-		'a_bathrooms':  this.is_checked($('#a_bathrooms')),
-		'a_24_7_access':  this.is_checked($('#a_24_7_access')),
-		'a_heating':  this.is_checked($('#a_heating')),
-		'a_furniture':  this.is_checked($('#a_furniture')),
-		'a_sound_iso':  this.is_checked($('#a_sound_iso')),
-		'a_pub_transport':  this.is_checked($('#a_pub_transport')),
-		'a_parking':  this.is_checked($('#a_parking')),
+		'a_electricity': this.is_checked($('#electr')),
+		'a_wifi':  this.is_checked($('#wifi')),
+		'a_bathrooms':  this.is_checked($('#toilet')),
+		'a_24_7_access':  this.is_checked($('#access')),
+		'a_heating':  this.is_checked($('#heat')),
+		'a_furniture':  this.is_checked($('#furnit')),
+		'a_sound_iso':  this.is_checked($('#sound')),
+		'a_pub_transport':  this.is_checked($('#transp')),
+		'a_parking':  this.is_checked($('#parking')),
 		'details': $('#details').val(),
-		'contact_1': $('#contact_1').val(),
-		'contact_2': $('#contact_2').val(),
+		'contact_name': $('#contact_name').val(),
+		'contact_email': $('#contact_email').val(),
+		'contact_number': $('#contact_number').val()
 	};
 	console.log(json);
 	$.post('php/add_new_data.php', json, function(data){
 		//returns folder name (username+propeerty id)
-		uploadImages(data);
+		//uploadImages(data);
 		
 	});
 }
