@@ -10,14 +10,14 @@
 				<div class="row margin-bottom">
 					<div class="col-lg-11" style="background-color: ;">
 						<div class="label"><p><i>Location:</i></p></div> 
-						<div style="overflow:hidden;width: auto;"><input type="text" name="fname" style="overflow:hidden; width: 100%" placeholder="Location:"></div>
+						<div style="overflow:hidden;width: auto;"><input type="text" id="qs_addr" name="fname" style="overflow:hidden; width: 100%" placeholder="Location:"></div>
 					</div>
 				</div>
 				<div class="row" style="background-color: ;">	
 					<div class="col-lg-6 margin-bottom" style="background-color: ; ">
 						<div class="label"><p style="padding-top: 8px;"><i>Building type:</i></p></div>
 						<div style="overflow:hidden;width: auto;">
-						<select name="Building type: " style="width: 100%">
+						<select id="qs_type" name="Building type: " style="width: 100%">
 							<option>-- Select Type -- </option>
 							<option value="Officet">Office</option>
 							<option value="Industrialt">Industrial</option>
@@ -34,7 +34,7 @@
 					<div class="col-lg-5 margin-bottom" style="background-color:;">
 						<div class="label"><p><i>Size:</i></p></div>
 						<div style="overflow:hidden;width: auto;">
-						  <select name="Size: " id="optionlist" style="width: 100%">
+						  <select name="Size: " id="qs_size" style="width: 100%">
 							<option>-- Select Size --</option>
 							<option value="1">Small</option>
 							<option value="2">Medium</option>
@@ -50,7 +50,7 @@
 						<a href="#" class="advsearch" style="color: #eef93d; font-size: 120%; display: table-cell; vertical-align: middle; text-align: right; font-style: italic;">Advanced Search</a>
 					</div>
 					<div class="col-lg-5 search-col" style="background-color: ;margin-bottom: 17px;">
-						<input type="submit" name="fname" value="Search" class="searchbtn" style="">
+						<input id="quick_srch_btn" type="button"  value="Search" class="searchbtn" style="">
 					</div>				
 
 				</div>				

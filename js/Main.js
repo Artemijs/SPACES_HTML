@@ -1,6 +1,6 @@
 var username = "BOBO";
 var page = 3;
-var pages = ["logIn.html","add_property.html", "my_uploads.html", "home.html"];
+var pages = ["logIn.html","add_property.html", "my_uploads.html", "home.html", "search_result.html"];
 function onLoad(){
     //load html
     loadHTML();
@@ -12,6 +12,7 @@ function onLoad(){
 }
 
 function processHTML(){
+    $("#quick_srch_btn").click(quickSearch);
 	$('#submit_new').click(add_new);
     $("#login").click(logIn);
     $("#my_uploads").click(function(){changePage(2);});
@@ -19,8 +20,44 @@ function processHTML(){
     $("#page_0").hide();
     $("#page_1").hide();
     $("#page_2").hide();
-    $("#nav").hide();
+    $("#page_4").hide();
 
+    $("#nav").hide();
+}
+function quickSearch(){
+    var type = $("#qs_type").val(); 
+    var size = $("#qs_size").val();
+    var addr = $("#qs_addr").val();
+    console.log("type "+type+" size "+size);
+    $.get("php/quick_search.php", {"type":type, "size":size, "address":addr}, function(data){
+        console.log(data);
+        changePage(4); 
+        showSearchResults(JSON.parse(data));    
+    });
+
+}
+function showImage(usn){
+    $.get("php/get_image.php",{"name":usn }, function(data){
+        var data = JSON.parse(data);
+        console.log(data);
+        $("#"+data[1]["name"]).append("<img src='"+data[0]["data"]+"'>");
+    });            
+
+
+}
+function showSearchResults(data){
+    
+    console.log(data);
+    var mainDiv = $("#search_results");
+    mainDiv.empty();
+    for(var i =0; i<data.length; i++){
+        var usn = data[i]["id"]+data[i]["user"];
+        var div = $("<div id = '"+usn+"'></div>");
+        mainDiv.append(div);
+        div.append("<p>"+data[i]["address"]+"</p>");
+        div.append("<p>"+data[i]["type"]+"</p>");
+        showImage(usn);
+    }
 
 }
 function loadHTML(){
@@ -64,11 +101,7 @@ function showMyProperty(){
             $("#page_2").append(div);
             //get the image
             console.log("usn "+usn);
-            $.get("php/get_image.php",{"name":usn }, function(data){
-                var data = JSON.parse(data);
-                console.log(data);
-                $("#"+data[1]["name"]).append("<img src='"+data[0]["data"]+"'>");
-            });            
+            showImage(usn);
         }
     });
 }
@@ -134,7 +167,7 @@ function add_new(){
 	console.log(json);
 	$.post('php/add_new_data.php', json, function(data){
 		//returns folder name (username+propeerty id)
-		//uploadImages(data);
+		uploadImages(data);
 		
 	});
 }
